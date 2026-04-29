@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useApp } from '../App'
 import TagInput from './TagInput'
+import FMAttrEditor from './FMAttrEditor'
 import { FORMATIONS, LEAGUES, SEASONS, POS_COLORS, SUGGEST_TAGS } from '../lib/constants'
 
 const POSITIONS = ['GK','CB','LB','RB','LWB','RWB','SW','DM','CM','AM','LM','RM','LW','RW','SS','CF','ST']
@@ -55,7 +56,7 @@ function VideoBuilder({ videos, setVideos }) {
 }
 
 const BLANK_MATCH = { homeTeam:'', awayTeam:'', homeFormation:'', awayFormation:'', league:'', season:'', matchDate:'', driveLink:'', tags:[], notes:'' }
-const BLANK_PLAYER = { name:'', dob:'', nationality:'', club:'', position:'', foot:'', height:'', rating:0, tags:[], report:'', videos:[] }
+const BLANK_PLAYER = { name:'', dob:'', nationality:'', club:'', position:'', foot:'', height:'', rating:0, tags:[], report:'', videos:[], attributes:{}, secondaryPositions:[] }
 
 export default function AdminPanel({ onClose }) {
   const { matches, players, addMatch, updateMatch, deleteMatch, addPlayer, updatePlayer, deletePlayer, user, logout, showToast } = useApp()
@@ -126,7 +127,7 @@ export default function AdminPanel({ onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/95 z-[700] flex items-start justify-center p-5 overflow-y-auto">
-      <div className="bg-bg-2 border border-border-2 rounded-2xl w-full max-w-[820px] my-auto">
+      <div className="bg-bg-2 border border-border-2 rounded-2xl w-full max-w-[1100px] my-auto">
 
         {/* Header */}
         <div className="px-6 py-4 border-b border-border flex items-center justify-between flex-wrap gap-3">
@@ -308,8 +309,21 @@ export default function AdminPanel({ onClose }) {
                             rows={5} className={inputCls + " resize-y min-h-[90px] text-xs leading-relaxed"} />
                 </div>
                 <div className="col-span-2 flex flex-col gap-1">
+                  <label className="font-mono-custom text-[9px] text-fsw-muted uppercase tracking-widest">Secondary Positions</label>
+                  <TagInput tags={playerForm.secondaryPositions} setTags={fp('secondaryPositions')}
+                            placeholder="CB, LM... (secondary positions)"
+                            suggestions={['GK','CB','LB','RB','LWB','RWB','DM','CM','AM','LM','RM','LW','RW','SS','CF','ST']} />
+                </div>
+                <div className="col-span-2 flex flex-col gap-1">
                   <label className="font-mono-custom text-[9px] text-fsw-muted uppercase tracking-widest">Video Links</label>
                   <VideoBuilder videos={playerForm.videos} setVideos={fp('videos')} />
+                </div>
+                <div className="col-span-2 flex flex-col gap-1 pt-3 border-t border-border">
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="font-mono-custom text-[9px] text-fsw-muted uppercase tracking-widest">FM Attributes (1–20)</label>
+                    <span className="font-mono-custom text-[9px] text-fsw-muted2">Technical · Mental · Physical</span>
+                  </div>
+                  <FMAttrEditor attrs={playerForm.attributes} onChange={fp('attributes')} />
                 </div>
               </div>
 
