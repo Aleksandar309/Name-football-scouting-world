@@ -97,12 +97,16 @@ export default function AdminPanel({ onClose }) {
   }
 
   // ── PLAYER ──
-  function resetPlayer() { setPlayerForm(BLANK_PLAYER); setEditPid(null) }
   function editPlayer(p) {
     setPlayerForm({ name: p.name||'', dob: p.dob||'', nationality: p.nationality||'', club: p.club||'',
       position: p.position||'', foot: p.foot||'', height: p.height||'', rating: p.rating||0,
-      tags: p.tags||[], report: p.report||'', videos: p.videos||[] })
-    setEditPid(p.id); setTab('player')
+      tags: p.tags||[], report: p.report||'', videos: p.videos||[], attributes: p.attributes||{}, secondaryPositions: p.secondaryPositions||[] })
+    setEditPid(p.id)
+    setTab('match')
+    setTimeout(() => {
+      setTab('player')
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 50)
   }
   async function savePlayer() {
     const { name, nationality, club, position } = playerForm
