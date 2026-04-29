@@ -1,4 +1,5 @@
-import { PITCH_POSITIONS, POS_COLORS } from '../lib/constants'
+import { POS_COLORS } from '../lib/constants'
+import { PITCH_POSITIONS } from '../lib/fmRoles'
 
 export default function FMPitch({ primaryPos, secondaryPositions = [], size = 'md' }) {
   const w = size === 'sm' ? 160 : 220
