@@ -126,7 +126,7 @@ export default function AdminPanel({ onClose }) {
   const selectCls = inputCls + " select-styled"
 
   return (
-    <div className="fixed inset-0 bg-black/95 z-[700] flex items-start justify-center p-5 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/95 z-[900] flex items-start justify-center p-5 overflow-y-auto">
       <div className="bg-bg-2 border border-border-2 rounded-2xl w-full max-w-[1100px] my-auto">
 
         {/* Header */}
