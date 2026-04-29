@@ -130,7 +130,7 @@ export default function AdminPanel({ onClose }) {
   const selectCls = inputCls + " select-styled"
 
   return (
-    <div className="fixed inset-0 bg-black/95 z-[900] flex items-start justify-center p-5 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/95 z-[900] flex items-start justify-center p-5 overflow-y-auto" onClick={e => e.stopPropagation()}>
       <div className="bg-bg-2 border border-border-2 rounded-2xl w-full max-w-[1100px] my-auto">
 
         {/* Header */}
@@ -355,7 +355,7 @@ export default function AdminPanel({ onClose }) {
                         <div className="font-mono-custom text-[10px] text-fsw-muted mt-0.5">{p.position} · {p.club} · {p.nationality}</div>
                       </div>
                       <div className="flex gap-1.5 flex-shrink-0">
-                        <button onClick={() => editPlayer(p)} className="border border-fsw-blue/30 text-fsw-blue text-[11px] px-2.5 py-1 rounded-md hover:bg-fsw-blue/10 transition-all">Edit</button>
+                        <button onClick={(e) => { e.stopPropagation(); editPlayer(p) }} className="border border-fsw-blue/30 text-fsw-blue text-[11px] px-2.5 py-1 rounded-md hover:bg-fsw-blue/10 transition-all">Edit</button>
                         <button onClick={async () => { if(confirm('Delete?')) { await deletePlayer(p.id); showToast('Player deleted.') }}}
                                 className="border border-fsw-red/30 text-fsw-red text-[11px] px-2.5 py-1 rounded-md hover:bg-fsw-red/10 transition-all">Delete</button>
                       </div>
